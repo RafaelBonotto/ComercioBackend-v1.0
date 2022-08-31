@@ -5,13 +5,13 @@ VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pagamentos", "Pagamentos", "{415555FE-4CF0-4E12-9360-F2DF909748DB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Servicos", "1-Servicos", "{BC16823B-761D-4865-8B3C-EC8A44B167EA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Servicos", "1 - Servicos", "{BC16823B-761D-4865-8B3C-EC8A44B167EA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Aplicacao", "2-Aplicacao", "{5C820AB0-FA3E-448D-8C5F-08093F72AE81}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Aplicacao", "2 - Aplicacao", "{5C820AB0-FA3E-448D-8C5F-08093F72AE81}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Dominio", "3-Dominio", "{66FC58B7-E226-41BB-A7E7-F8A9F4306719}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Dominio", "3 - Dominio", "{66FC58B7-E226-41BB-A7E7-F8A9F4306719}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Infra", "4-Infra", "{04137D68-A44D-4B16-96E2-7A1713AEB77A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infra", "4 - Infra", "{04137D68-A44D-4B16-96E2-7A1713AEB77A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pagamentos.Api", "Pagamentos\Servicos\Pagamentos.Api\Pagamentos.Api.csproj", "{CC820FD7-76F5-48D4-BD8F-194646699766}"
 EndProject
@@ -23,11 +23,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dominio", "Dominio", "{8864
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{EB99869B-716B-41AC-969D-EF95FE8CC727}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comum.Aplicacao", "Comum\Aplicacao\Comum.Aplicacao\Comum.Aplicacao.csproj", "{13E61E65-DF13-4A8C-86C4-B9A320940D02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comum.Aplicacao", "Comum\Aplicacao\Comum.Aplicacao\Comum.Aplicacao.csproj", "{13E61E65-DF13-4A8C-86C4-B9A320940D02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comum.Dominio", "Comum\Dominio\Comum.Dominio\Comum.Dominio.csproj", "{9DFAF0C1-AE98-4A23-AA9A-7377F8EEA95D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comum.Dominio", "Comum\Dominio\Comum.Dominio\Comum.Dominio.csproj", "{9DFAF0C1-AE98-4A23-AA9A-7377F8EEA95D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comum.Infra", "Comum\Infra\Comum.Infra\Comum.Infra.csproj", "{446613BF-48A4-424F-AFE0-E700C9AE9F9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comum.Infra", "Comum\Infra\Comum.Infra\Comum.Infra.csproj", "{446613BF-48A4-424F-AFE0-E700C9AE9F9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
