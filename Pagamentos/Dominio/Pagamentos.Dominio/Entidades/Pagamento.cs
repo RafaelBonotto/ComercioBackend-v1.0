@@ -1,7 +1,7 @@
 ﻿namespace Pagamentos.Dominio.Entidades
 {
     //[Table("tb_pagamento")]
-    public class Pagamento 
+    public class Pagamento
     {
         public int Id { get; set; }
         public decimal Valor { get; set; }
