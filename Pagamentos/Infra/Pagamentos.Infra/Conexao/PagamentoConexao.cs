@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Comum.Infra.ConnectionManager.Interfaces;
+using Microsoft.Extensions.Configuration;
 using MySqlConnector;
 using Pagamentos.Infra.Conexao.Interfaces;
 
@@ -8,6 +9,7 @@ namespace Pagamentos.Infra.Conexao
     {
         private readonly IConfiguration _config;
         private readonly string _connectionString;
+        private readonly IConnectionManager _connection;
 
         public PagamentoConexao(IConfiguration config)
         {
@@ -17,9 +19,14 @@ namespace Pagamentos.Infra.Conexao
 
         public async Task<MySqlConnection> GetConnectionAsync()
         {
-            MySqlConnection connection = new(_connectionString);
-            await connection.OpenAsync();
-            return connection;
+            try
+            {
+                return await _connection.GetConnectionAsync(_connectionString);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Não foi possível realizar a conexão - {ex.Message}");
+            }
         }
     }
 }

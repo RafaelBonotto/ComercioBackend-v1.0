@@ -1,6 +1,6 @@
 ﻿namespace Pagamentos.Aplicacao
 {
-    public class Initializer
+    public class Initializer 
     {
 
     }

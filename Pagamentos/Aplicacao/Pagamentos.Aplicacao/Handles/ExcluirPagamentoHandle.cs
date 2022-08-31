@@ -4,5 +4,6 @@ namespace Pagamentos.Aplicacao.Handles
 {
     public class ExcluirPagamentoHandle : IExcluirPagamentoHandle
     {
+
     }
 }
