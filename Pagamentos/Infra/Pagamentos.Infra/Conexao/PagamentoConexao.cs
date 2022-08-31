@@ -5,7 +5,7 @@ using Pagamentos.Infra.Conexao.Interfaces;
 
 namespace Pagamentos.Infra.Conexao
 {
-    public class PagamentoConexao : IPagamentoConexao
+    public class PagamentoConexao : IPagamentoConexao 
     {
         private readonly IConfiguration _config;
         private readonly string _connectionString;
