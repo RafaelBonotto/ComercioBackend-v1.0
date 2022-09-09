@@ -37,11 +37,10 @@ namespace Usuario.Aplicacao.Handles
             if (usuario is null)
                 return null;
 
-            // Validação da senha
-            var senhaValida = PasswordHasher.Verify(usuario.Senha_hash, senha);
+            bool senhaValida = PasswordHasher.Verify(usuario.Senha_hash, senha);
             if (senhaValida)
             {
-                // Carregar permissões
+                usuario.Permissao = await _repositorio.ObterPermissao(usuario.Id);
                 var jwtKey = _config.GetSection("JwtKey").Value;
                 return _tokenService.GetToken(usuario, jwtKey);
             }

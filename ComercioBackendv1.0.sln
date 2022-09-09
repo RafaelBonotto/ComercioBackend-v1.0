@@ -45,13 +45,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dominio", "Dominio", "{1278
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{B80CB6D1-1ACA-4290-929A-2D87E8EC63A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usuario.Api", "Usuario\Api\Usuario.Api\Usuario.Api.csproj", "{9F7D756A-3850-496B-B6BC-08B90C679885}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Usuario.Api", "Usuario\Api\Usuario.Api\Usuario.Api.csproj", "{9F7D756A-3850-496B-B6BC-08B90C679885}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usuario.Aplicacao", "Usuario\Aplicacao\Usuario.Aplicacao\Usuario.Aplicacao.csproj", "{2D61A965-1781-419D-A494-11C800B454A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Usuario.Aplicacao", "Usuario\Aplicacao\Usuario.Aplicacao\Usuario.Aplicacao.csproj", "{2D61A965-1781-419D-A494-11C800B454A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usuario.Dominio", "Usuario\Dominio\Usuario.Dominio\Usuario.Dominio.csproj", "{4071ED80-D5BD-46B2-ADD5-A6683B0F4FCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Usuario.Dominio", "Usuario\Dominio\Usuario.Dominio\Usuario.Dominio.csproj", "{4071ED80-D5BD-46B2-ADD5-A6683B0F4FCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usuario.Infra", "Usuario\Infra\Usuario.Infra\Usuario.Infra.csproj", "{A51B933B-B669-41E9-9C81-48C7F5F4FDFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Usuario.Infra", "Usuario\Infra\Usuario.Infra\Usuario.Infra.csproj", "{A51B933B-B669-41E9-9C81-48C7F5F4FDFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
