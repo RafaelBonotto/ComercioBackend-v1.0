@@ -1,5 +1,7 @@
-﻿using Dapper.Contrib.Extensions;
+﻿using Dapper;
+using Dapper.Contrib.Extensions;
 using Usuario.Infra.Conexao.Interfaces;
+using Usuario.Infra.Querys;
 using Usuario.Infra.Repositorios.Interfaces;
 
 namespace Usuario.Infra.Repositorios
@@ -18,8 +20,21 @@ namespace Usuario.Infra.Repositorios
             using var connection = await _connection.GetConnectionAsync();
             var idUsuario = await connection.InsertAsync<Comum.Dominio.Entidades.Usuario>(usuario);
             if (idUsuario <= 0)
-                throw new Exception("Não foi possível inserir o usuario");
+                return -1;
+
             return idUsuario;
+        }
+
+        public async Task<Comum.Dominio.Entidades.Usuario> ObterUsuarioPorEmail(string email)
+        {
+            using var connection = await _connection.GetConnectionAsync();
+            var usuario = await connection.QueryAsync<Comum.Dominio.Entidades.Usuario>(
+                    sql: UsuarioQuerys.SELECT_USUARIO_POR_EMAIL,
+                    param: new { email });
+            if (usuario.Any())
+                return usuario.First();
+
+            return null;
         }
     }
 }

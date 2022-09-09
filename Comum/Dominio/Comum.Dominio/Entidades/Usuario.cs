@@ -15,6 +15,9 @@ namespace Comum.Dominio.Entidades
         public DateTime Data_alteracao { get; set; }
 
         [Write(false)]
+        public string Senha { get; set; }
+
+        [Write(false)]
         public List<Permissao> Permissao { get; set; } = new();
     }
 }
