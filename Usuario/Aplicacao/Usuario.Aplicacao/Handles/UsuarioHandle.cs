@@ -42,7 +42,8 @@ namespace Usuario.Aplicacao.Handles
             {
                 usuario.Permissao = await _repositorio.ObterPermissao(usuario.Id);
                 var jwtKey = _config.GetSection("JwtKey").Value;
-                return _tokenService.GetToken(usuario, jwtKey);
+                var token = _tokenService.GetToken(usuario, jwtKey);
+                return token;
             }
             return null;
         }
