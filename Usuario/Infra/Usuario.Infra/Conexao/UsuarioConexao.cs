@@ -12,10 +12,13 @@ namespace Usuario.Infra.Conexao
         private readonly string _connectionString;
         private readonly IConnectionManager _connection;
 
-        public UsuarioConexao(IConfiguration config)
+        public UsuarioConexao(
+            IConfiguration config, 
+            IConnectionManager connection)
         {
             _config = config;
             _connectionString = _config.GetConnectionString("Comerciodb");
+            _connection = connection;
         }
 
         public async Task<MySqlConnection> GetConnectionAsync()

@@ -15,7 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\..\..\Comum\Dominio\Comum.Dominio\Comum.Dominio.csproj" />
+    <ProjectReference Include="..\..\Aplicacao\Usuario.Aplicacao\Usuario.Aplicacao.csproj" />
   </ItemGroup>
 
 </Project>

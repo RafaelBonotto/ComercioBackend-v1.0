@@ -45,13 +45,13 @@ namespace Comum.Aplicacao.Services
                 foreach (var permissao in user.Permissao)
                     ret.Add(new Claim(
                             type: ClaimTypes.Role, // Tipo de claim (Permissão)
-                            value: permissao.ToString())); // Valor
+                            value: permissao.Descricao.ToString())); // Valor
             }
             else
             {
                 ret.Add(new Claim(
                     type: ClaimTypes.Role,
-                    value: user.Permissao.First().ToString()));
+                    value: user.Permissao.First().Descricao.ToString()));
             }
 
             return ret.ToArray();
