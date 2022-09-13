@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using SecureIdentity.Password;
 using Usuario.Aplicacao.Handles.Interfaces;
+using Usuario.Aplicacao.Response;
 using Usuario.Infra.Repositorios.Interfaces;
 
 namespace Usuario.Aplicacao.Handles
@@ -22,16 +23,21 @@ namespace Usuario.Aplicacao.Handles
             _config = config;
         }
 
-        public async Task<int> CadastrarUsuario(Comum.Dominio.Entidades.Usuario usuario)
+        public async Task<CadastrarUsuarioResponse> CadastrarUsuarioAsync(Comum.Dominio.Entidades.Usuario usuario)
         {
             usuario.Senha_hash = PasswordHasher.Hash(usuario.Senha);
             usuario.Ativo = 1;
             usuario.Data_criacao = DateTime.Now;
             usuario.Data_alteracao = DateTime.Now;
-            return await _repositorio.InserirUsuario(usuario);
+            var idUsuario = await _repositorio.InserirUsuario(usuario);
+            return new CadastrarUsuarioResponse()
+            {
+                Sucesso = idUsuario > 0 ? true : false,
+                Id = idUsuario
+            };
         }
 
-        public async Task<string> Login(string email, string senha)
+        public async Task<LoginResponse> LoginAsync(string email, string senha)
         {
             var usuario = await _repositorio.ObterUsuarioPorEmail(email);
             if (usuario is null)
@@ -43,7 +49,7 @@ namespace Usuario.Aplicacao.Handles
                 usuario.Permissao = await _repositorio.ObterPermissao(usuario.Id);
                 var jwtKey = _config.GetSection("JwtKey").Value;
                 var token = _tokenService.GetToken(usuario, jwtKey);
-                return token;
+                return new LoginResponse() { Token = token };
             }
             return null;
         }
