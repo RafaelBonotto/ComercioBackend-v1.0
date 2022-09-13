@@ -16,8 +16,8 @@ namespace Usuario.Api.Controllers
             _handle = handle;
         }
 
-        [HttpPost("cadastrar")]
-        public async Task<IActionResult> Post([FromBody] UsuarioViewModel model)
+        [HttpPost("registrar")]
+        public async Task<IActionResult> PostAsync([FromBody] UsuarioViewModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErros());
@@ -28,36 +28,22 @@ namespace Usuario.Api.Controllers
                 Email = model.Email,
                 Senha = model.Senha
             };
-
-            var response = await _handle.CadastrarUsuario(usuario);
+            var response = await _handle.CadastrarUsuarioAsync(usuario);
             return Ok(response);
-
-            //try
-            //{
-
-            //}
-            //catch (DbUpdateException)
-            //{
-            //    return StatusCode(400, new ResultViewModel<string>("05X99 - Este E-mail já está cadastrado"));
-            //}
-            //catch
-            //{
-            //    return StatusCode(500, new ResultViewModel<string>("05X04 - Falha interna no servidor"));
-            //}
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginViewModel model)
+        public async Task<IActionResult> LoginAsync([FromBody] LoginViewModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErros());
 
-            var token = await _handle.Login(model.Email, model.Senha);
+            var response = await _handle.LoginAsync(model.Email, model.Senha);
 
-            if (token is null)
+            if (response is null)
                 return StatusCode(401, "Usuário ou senha inválidos");
 
-            return Ok(token);
+            return Ok(response);
         }
     }
 }

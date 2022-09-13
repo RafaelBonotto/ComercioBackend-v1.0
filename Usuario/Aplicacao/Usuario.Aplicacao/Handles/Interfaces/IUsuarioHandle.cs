@@ -1,8 +1,10 @@
-﻿namespace Usuario.Aplicacao.Handles.Interfaces
+﻿using Usuario.Aplicacao.Response;
+
+namespace Usuario.Aplicacao.Handles.Interfaces
 {
     public interface IUsuarioHandle
     {
-        Task<int> CadastrarUsuario(Comum.Dominio.Entidades.Usuario usuario);
-        Task<string> Login(string email, string senha);
+        Task<CadastrarUsuarioResponse> CadastrarUsuarioAsync(Comum.Dominio.Entidades.Usuario usuario);
+        Task<LoginResponse> LoginAsync(string email, string senha);
     }
 }

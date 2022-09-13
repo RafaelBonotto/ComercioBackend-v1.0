@@ -22,9 +22,6 @@ namespace Usuario.Infra.Repositorios
             // verifica se existe usuario cadastrado com mesmo email
             // criar metodo que adiociona permissao e chamar aqui passando permissao usuario
             var idUsuario = await connection.InsertAsync<Comum.Dominio.Entidades.Usuario>(usuario);
-            if (idUsuario <= 0)
-                return -1;
-
             return idUsuario;
         }
 
