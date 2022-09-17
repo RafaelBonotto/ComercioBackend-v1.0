@@ -1,4 +1,6 @@
 ﻿using Comum.Dominio.Entidades;
+using Comum.Dominio.Enums;
+using MySqlConnector;
 
 namespace Usuario.Infra.Repositorios.Interfaces
 {
