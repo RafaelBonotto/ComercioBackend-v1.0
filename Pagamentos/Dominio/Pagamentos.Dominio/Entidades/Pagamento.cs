@@ -1,6 +1,8 @@
-﻿namespace Pagamentos.Dominio.Entidades
+﻿using Dapper.Contrib.Extensions;
+
+namespace Pagamentos.Dominio.Entidades
 {
-    //[Table("tb_pagamento")]
+    [Table("tb_pagamento")]
     public class Pagamento
     {
         public int Id { get; set; }
