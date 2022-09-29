@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Comum\Aplicacao\Comum.Aplicacao\Comum.Aplicacao.csproj" />
     <ProjectReference Include="..\..\Aplicacao\Pagamentos.Aplicacao\Pagamentos.Aplicacao.csproj" />
   </ItemGroup>
 
