@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper.Contrib" Version="2.0.78" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="MySqlConnector" Version="2.1.13" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Comum\Infra\Comum.Infra\Comum.Infra.csproj" />
+    <ProjectReference Include="..\..\Dominio\Pagamentos.Dominio\Pagamentos.Dominio.csproj" />
   </ItemGroup>
 
 </Project>
