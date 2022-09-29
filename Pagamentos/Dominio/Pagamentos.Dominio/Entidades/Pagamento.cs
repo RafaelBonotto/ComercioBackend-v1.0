@@ -11,5 +11,8 @@
         public int Qtd_parcela { get; set; }
         public int NotaFiscal { get; set; }
         public int Fornecedor_id { get; set; }
+        public sbyte Ativo { get; set; }
+        public DateTime Data_criacao { get; set; }
+        public DateTime Data_alteracao { get; set; }
     }
 }
