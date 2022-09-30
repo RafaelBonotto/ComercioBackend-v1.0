@@ -43,7 +43,7 @@ namespace Pagamentos.Api.Controllers
                     Num_parcela = req.NumeroParcela,
                     Qtd_parcela = req.QtdParcela,
                     Fornecedor_id = req.FornecedorId,
-                    NotaFiscal = int.Parse(req.NotaFiscal)
+                    Nota_fiscal = int.Parse(req.NotaFiscal)
                 };
                 return Ok(await _inserirPagamentoHandle.PostAsync(pagamento));
             }
