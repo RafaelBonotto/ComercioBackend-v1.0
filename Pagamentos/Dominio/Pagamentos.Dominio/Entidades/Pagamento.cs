@@ -11,7 +11,7 @@ namespace Pagamentos.Dominio.Entidades
         public DateTime Dt_vencimento { get; set; }
         public int Num_parcela { get; set; }
         public int Qtd_parcela { get; set; }
-        public int NotaFiscal { get; set; }
+        public int Nota_fiscal { get; set; }
         public int Fornecedor_id { get; set; }
         public sbyte Ativo { get; set; }
         public DateTime Data_criacao { get; set; }

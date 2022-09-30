@@ -3,6 +3,8 @@ using Pagamentos.Aplicacao.Handles;
 using Microsoft.Extensions.DependencyInjection;
 using Pagamentos.Infra.Repositorios;
 using Pagamentos.Infra.Repositorios.Interfaces;
+using Comum.Infra.ConnectionManager.Interfaces;
+using Comum.Infra.ConnectionManager;
 
 namespace Pagamentos.Aplicacao
 {
@@ -10,6 +12,8 @@ namespace Pagamentos.Aplicacao
     {
         public static void ConfigureIocDI(this IServiceCollection services)
         {
+            //Connection 
+            services.AddScoped<IConnectionManager, ConnectionManager>();
             //Handles
             services.AddScoped<IInserirPagamentoHandle, InserirPagamentoHandle>();
             services.AddScoped<IObterPagamentoHandle, ObterPagamentoHandle>();
