@@ -4,6 +4,8 @@ using Pagamentos.Infra.Repositorios.Interfaces;
 using Dapper.Contrib;
 using Microsoft.Extensions.Configuration;
 using Dapper.Contrib.Extensions;
+using Dapper;
+using Pagamentos.Infra.Querys;
 
 namespace Pagamentos.Infra.Repositorios
 {
@@ -26,6 +28,20 @@ namespace Pagamentos.Infra.Repositorios
         {
             using var connection = await _connection.GetConnectionAsync(_connectionString);
             return await connection.InsertAsync<Pagamento>(pagamento);
+        }
+
+        public async Task<List<Pagamento>> GetByDataVencimentoAsync(DateTime dataVencimentoDe, DateTime dataVencimentoAte)
+        {
+            List<Pagamento> ret = new();
+            using var connection = await _connection.GetConnectionAsync(_connectionString);
+            var pagamentosResponse = await connection.QueryAsync<Pagamento>(
+                sql: PagamentoQuerys.SELECT_PGTO_BY_DT_VCTO,
+                param: new { dataVencimentoDe, dataVencimentoAte });
+
+            if (pagamentosResponse != null && pagamentosResponse.Any())
+                ret = pagamentosResponse.ToList();
+
+            return ret;
         }
     }
 }

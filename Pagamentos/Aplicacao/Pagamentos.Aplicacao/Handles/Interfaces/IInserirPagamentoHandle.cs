@@ -5,6 +5,6 @@ namespace Pagamentos.Aplicacao.Handles.Interfaces
 {
     public interface IInserirPagamentoHandle
     {
-        Task<PagamentoResponse> PostAsync(PagamentoRequest pagamento);
+        Task<InserirPagamentoResponse> PostAsync(PagamentoRequest pagamento);
     }
 }

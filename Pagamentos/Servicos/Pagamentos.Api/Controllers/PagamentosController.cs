@@ -1,10 +1,9 @@
 ﻿using Comum.Aplicacao.Extensions;
-using Microsoft.AspNetCore.Http;
+using Comum.Aplicacao.Tools;
 using Microsoft.AspNetCore.Mvc;
 using Pagamentos.Aplicacao.Handles.Interfaces;
 using Pagamentos.Aplicacao.Request;
-using System.Globalization;
-using System.Text;
+using Pagamentos.Aplicacao.Response;
 
 namespace Pagamentos.Api.Controllers
 {
@@ -13,33 +12,66 @@ namespace Pagamentos.Api.Controllers
     public class PagamentosController : ControllerBase
     {
         private IInserirPagamentoHandle _inserirPagamentoHandle;
+        private IObterPagamentoHandle _obterPagamentoHandle;
 
-        public PagamentosController(IInserirPagamentoHandle inserirPagamentoHandle)
+        public PagamentosController(
+            IInserirPagamentoHandle inserirPagamentoHandle, 
+            IObterPagamentoHandle obterPagamentoHandle)
         {
             _inserirPagamentoHandle = inserirPagamentoHandle;
+            _obterPagamentoHandle = obterPagamentoHandle;
         }
 
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] PagamentoRequest req)
         {
+            InserirPagamentoResponse ret = new();
             if (!ModelState.IsValid)
             {
-                StringBuilder msg = new();
-                foreach (var erro in ModelState.GetErros())
-                    msg.Append(erro.ToString());
-
-                return BadRequest(msg.ToString());
+                string errorMsg = Helper.MensagemConcatenada(ModelState.GetErros());
+                return BadRequest(errorMsg);
             }
             try
             {
-                return Ok(await _inserirPagamentoHandle.PostAsync(req));
+                ret = await _inserirPagamentoHandle.PostAsync(req);
+                if(ret.PagamentoId <= 0)
+                {
+                    ret.Success = false;
+                    ret.Errors.Add("Não foi possível inserir o pagamento");
+                }
+                return Ok(ret);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                ret.Success = false;
+                ret.Errors.Add($"Não foi possível inserir o pagamento: {ex.Message}");
+                return StatusCode(500, ret);
             }
-            
-            
+        }
+
+        [HttpGet("dt-vcto-de-ate")]
+        public async Task<IActionResult> GetDtVctoDeAteAsync([FromQuery] GetByDataVencimentoRequest req)
+        {
+            ListaPagamentoResponse ret = new();
+            if (!ModelState.IsValid)
+            {
+                string errorMsg = Helper.MensagemConcatenada(ModelState.GetErros());
+                return BadRequest(errorMsg);
+            }
+            try
+            {
+                ret = await _obterPagamentoHandle.GetByDataVencimentoAsync(req);
+                if (!ret.Pagamentos.Any())
+                    return NoContent();
+
+                return Ok(ret);
+            }
+            catch (Exception ex)
+            {
+                ret.Success = false;
+                ret.Errors.Add($"Erro ao tentar encontrar o pagamento: {ex.Message}");
+                return StatusCode(500, ret);
+            }
         }
     }
 }
