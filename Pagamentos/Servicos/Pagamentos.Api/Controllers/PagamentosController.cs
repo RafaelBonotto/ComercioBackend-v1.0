@@ -32,20 +32,7 @@ namespace Pagamentos.Api.Controllers
             }
             try
             {
-                var pagamento = new Dominio.Entidades.Pagamento
-                {
-                    Ativo = 1,
-                    Data_criacao = DateTime.Now,
-                    Data_alteracao = DateTime.Now,
-                    Dt_vencimento = DateTime.ParseExact(req.DataVencimento, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                    Dt_entrega = DateTime.ParseExact(req.DataEntrega, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                    Valor = req.Valor,
-                    Num_parcela = req.NumeroParcela,
-                    Qtd_parcela = req.QtdParcela,
-                    Fornecedor_id = req.FornecedorId,
-                    Nota_fiscal = int.Parse(req.NotaFiscal)
-                };
-                return Ok(await _inserirPagamentoHandle.PostAsync(pagamento));
+                return Ok(await _inserirPagamentoHandle.PostAsync(req));
             }
             catch (Exception ex)
             {
