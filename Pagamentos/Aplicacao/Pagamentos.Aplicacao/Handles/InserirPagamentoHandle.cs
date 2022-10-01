@@ -29,8 +29,8 @@ namespace Pagamentos.Aplicacao.Handles
                 Valor = req.Valor,
                 Num_parcela = req.NumeroParcela,
                 Qtd_parcela = req.QtdParcela,
-                Fornecedor_id = req.FornecedorId,
-                Nota_fiscal = int.Parse(req.NotaFiscal)
+                Fornecedor_id = req.FornecedorId != null ? req.FornecedorId : null,
+                Nota_fiscal = string.IsNullOrEmpty(req.NotaFiscal) ? int.Parse(req.NotaFiscal) : 0
             };
             
             ret.PagamentoId = await _repositorio.PostAsync(pagamento);
