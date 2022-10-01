@@ -16,9 +16,9 @@ namespace Pagamentos.Aplicacao.Handles
             _repositorio = repositorio;
         }
 
-        public async Task<PagamentoResponse> PostAsync(PagamentoRequest req)
+        public async Task<InserirPagamentoResponse> PostAsync(PagamentoRequest req)
         {
-            PagamentoResponse ret = new();
+            InserirPagamentoResponse ret = new();
             var pagamento = new Dominio.Entidades.Pagamento
             {
                 Ativo = 1,

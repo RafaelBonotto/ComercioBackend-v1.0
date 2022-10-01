@@ -30,7 +30,7 @@ namespace Pagamentos.Infra.Repositorios
             return await connection.InsertAsync<Pagamento>(pagamento);
         }
 
-        public async Task<List<Pagamento>> GetByDataVencimento(DateTime dataVencimentoDe, DateTime dataVencimentoAte)
+        public async Task<List<Pagamento>> GetByDataVencimentoAsync(DateTime dataVencimentoDe, DateTime dataVencimentoAte)
         {
             List<Pagamento> ret = new();
             using var connection = await _connection.GetConnectionAsync(_connectionString);
