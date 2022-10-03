@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Dapper.Contrib.Extensions;
 using Dapper;
 using Pagamentos.Infra.Querys;
+using Comum.Dominio.Entidades;
 
 namespace Pagamentos.Infra.Repositorios
 {
@@ -42,6 +43,31 @@ namespace Pagamentos.Infra.Repositorios
                 ret = pagamentosResponse.ToList();
 
             return ret;
+        }
+
+        public async Task<BaseResponse> DesativarPagamentoAsync(int idPagamento)
+        {
+            BaseResponse ret = new();
+            try
+            {
+                using var connection = await _connection.GetConnectionAsync(_connectionString);
+                var pgto = await connection.GetAsync<Pagamento>(idPagamento);
+                if (pgto is null)
+                {
+                    ret.Success = false;
+                    ret.Errors.Add("Pagamento não encontrado");
+                }
+                pgto.Data_alteracao = DateTime.Now;
+                pgto.Ativo = 0;
+                ret.Success = await connection.UpdateAsync<Pagamento>(pgto);
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                ret.Success = false;
+                ret.Errors.Add(ex.Message);
+                return ret;
+            }
         }
     }
 }
