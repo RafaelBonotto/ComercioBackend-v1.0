@@ -1,5 +1,6 @@
 ﻿using Comum.Aplicacao.Extensions;
 using Comum.Aplicacao.Tools;
+using Comum.Dominio.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using Pagamentos.Aplicacao.Handles.Interfaces;
 using Pagamentos.Aplicacao.Request;
@@ -13,24 +14,26 @@ namespace Pagamentos.Api.Controllers
     {
         private IInserirPagamentoHandle _inserirPagamentoHandle;
         private IObterPagamentoHandle _obterPagamentoHandle;
+        private IExcluirPagamentoHandle _excluirPagamentoHandle;
 
         public PagamentosController(
-            IInserirPagamentoHandle inserirPagamentoHandle, 
-            IObterPagamentoHandle obterPagamentoHandle)
+            IInserirPagamentoHandle inserirPagamentoHandle,
+            IObterPagamentoHandle obterPagamentoHandle,
+            IExcluirPagamentoHandle excluirPagamentoHandle)
         {
             _inserirPagamentoHandle = inserirPagamentoHandle;
             _obterPagamentoHandle = obterPagamentoHandle;
+            _excluirPagamentoHandle = excluirPagamentoHandle;
         }
 
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] PagamentoRequest req)
         {
             InserirPagamentoResponse ret = new();
+
             if (!ModelState.IsValid)
-            {
-                string errorMsg = Helper.MensagemConcatenada(ModelState.GetErros());
-                return BadRequest(errorMsg);
-            }
+                return BadRequest(Helper.MensagemConcatenada(ModelState.GetErros()));
+
             try
             {
                 ret = await _inserirPagamentoHandle.PostAsync(req);
@@ -53,11 +56,10 @@ namespace Pagamentos.Api.Controllers
         public async Task<IActionResult> GetDtVctoDeAteAsync([FromQuery] GetByDataVencimentoRequest req)
         {
             ListaPagamentoResponse ret = new();
+
             if (!ModelState.IsValid)
-            {
-                string errorMsg = Helper.MensagemConcatenada(ModelState.GetErros());
-                return BadRequest(errorMsg);
-            }
+                return BadRequest(Helper.MensagemConcatenada(ModelState.GetErros()));
+
             try
             {
                 ret = await _obterPagamentoHandle.GetByDataVencimentoAsync(req);
@@ -70,6 +72,26 @@ namespace Pagamentos.Api.Controllers
             {
                 ret.Success = false;
                 ret.Errors.Add($"Erro ao tentar encontrar o pagamento: {ex.Message}");
+                return StatusCode(500, ret);
+            }
+        }
+
+        [Route("desativar/{id}")]
+        public async Task<IActionResult> DesativarAsync(int id)
+        {
+            BaseResponse ret = new();
+
+            if (!ModelState.IsValid) 
+                return BadRequest(Helper.MensagemConcatenada(ModelState.GetErros()));
+
+            try
+            {
+                return Ok(await _excluirPagamentoHandle.DesativarPagamentoAsync(id));
+            }
+            catch (Exception ex)
+            {
+                ret.Success = false;
+                ret.Errors.Add($"Erro ao tentar desativar o pagamento: {ex.Message}");
                 return StatusCode(500, ret);
             }
         }
