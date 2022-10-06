@@ -76,7 +76,7 @@ namespace Pagamentos.Api.Controllers
             }
         }
 
-        [Route("desativar/{id}")]
+        [HttpGet("desativar/{id}")]
         public async Task<IActionResult> DesativarAsync(int id)
         {
             BaseResponse ret = new();
