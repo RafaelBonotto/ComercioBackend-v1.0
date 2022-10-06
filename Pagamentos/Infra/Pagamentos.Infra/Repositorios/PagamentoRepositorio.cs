@@ -65,9 +65,9 @@ namespace Pagamentos.Infra.Repositorios
             return ret;
         }
 
-        public async Task<BaseResponse> DesativarPagamentoAsync(int idPagamento)
+        public async Task<EntityBase> DesativarPagamentoAsync(int idPagamento)
         {
-            BaseResponse ret = new();
+            EntityBase ret = new();
             try
             {
                 using var connection = await _connection.GetConnectionAsync(_connectionString);

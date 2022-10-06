@@ -1,9 +1,10 @@
-﻿using Dapper.Contrib.Extensions;
+﻿using Comum.Dominio.Entidades;
+using Dapper.Contrib.Extensions;
 
 namespace Pagamentos.Dominio.Entidades
 {
     [Table("tb_pagamento")]
-    public class Pagamento
+    public class Pagamento : EntityBase
     {
         public int Id { get; set; }
         public decimal Valor { get; set; }
@@ -16,5 +17,8 @@ namespace Pagamentos.Dominio.Entidades
         public sbyte Ativo { get; set; }
         public DateTime Data_criacao { get; set; }
         public DateTime Data_alteracao { get; set; }
+
+        public bool IsValid()
+            => Valor > 0;
     }
 }

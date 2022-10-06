@@ -79,7 +79,7 @@ namespace Pagamentos.Api.Controllers
         [HttpGet("desativar/{id}")]
         public async Task<IActionResult> DesativarAsync(int id)
         {
-            BaseResponse ret = new();
+            EntityBase ret = new();
 
             if (!ModelState.IsValid) 
                 return BadRequest(Helper.MensagemConcatenada(ModelState.GetErros()));
