@@ -31,6 +31,26 @@ namespace Pagamentos.Infra.Repositorios
             return await connection.InsertAsync<Pagamento>(pagamento);
         }
 
+        public async Task<bool> UpdateAsync(Pagamento pagamento)
+        {
+            using var connection = await _connection.GetConnectionAsync(_connectionString);
+            var pgtoBanco = await connection.GetAsync<Pagamento>(pagamento.Id);
+            if (pgtoBanco is null)
+                return false;
+
+            pgtoBanco.Ativo = 1;
+            pgtoBanco.Nota_fiscal = pagamento.Nota_fiscal;
+            pgtoBanco.Data_alteracao = DateTime.Now;
+            pgtoBanco.Valor = pagamento.Valor;
+            pgtoBanco.Dt_entrega = pagamento.Dt_entrega;
+            pgtoBanco.Dt_vencimento = pagamento.Dt_vencimento;
+            pgtoBanco.Fornecedor_id = pagamento.Fornecedor_id;
+            pgtoBanco.Num_parcela = pagamento.Num_parcela;
+            pgtoBanco.Qtd_parcela = pagamento.Qtd_parcela;
+            
+            return await connection.UpdateAsync<Pagamento>(pgtoBanco);
+        }
+
         public async Task<List<Pagamento>> GetByDataVencimentoAsync(DateTime dataVencimentoDe, DateTime dataVencimentoAte)
         {
             List<Pagamento> ret = new();

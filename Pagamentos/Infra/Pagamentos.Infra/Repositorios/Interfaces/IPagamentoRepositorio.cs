@@ -8,5 +8,6 @@ namespace Pagamentos.Infra.Repositorios.Interfaces
         Task<int> PostAsync(Pagamento pagamento);
         Task<List<Pagamento>> GetByDataVencimentoAsync(DateTime dataVencimentoDe, DateTime dataVencimentoAte);
         Task<BaseResponse> DesativarPagamentoAsync(int idPagamento);
+        Task<bool> UpdateAsync(Pagamento pagamento);
     }
 }
