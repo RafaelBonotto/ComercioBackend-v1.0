@@ -2,7 +2,7 @@
 
 namespace Pagamentos.Aplicacao.Response
 {
-    public class ListaPagamentoResponse : BaseResponse
+    public class ListaPagamentoResponse : EntityBase
     {
         public List<PagamentoResponse> Pagamentos { get; set; } = new();
     }

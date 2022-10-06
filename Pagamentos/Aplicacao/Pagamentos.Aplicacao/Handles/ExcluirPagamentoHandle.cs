@@ -13,7 +13,7 @@ namespace Pagamentos.Aplicacao.Handles
             _repositorio = repositorio;
         }
 
-        public async Task<BaseResponse> DesativarPagamentoAsync(int id)
+        public async Task<EntityBase> DesativarPagamentoAsync(int id)
             => await _repositorio.DesativarPagamentoAsync(id);
     }
 }

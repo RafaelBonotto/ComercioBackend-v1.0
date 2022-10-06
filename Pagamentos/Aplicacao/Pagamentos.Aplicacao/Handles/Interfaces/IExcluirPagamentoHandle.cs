@@ -4,6 +4,6 @@ namespace Pagamentos.Aplicacao.Handles.Interfaces
 {
     public interface IExcluirPagamentoHandle
     {
-        Task<BaseResponse> DesativarPagamentoAsync(int id);
+        Task<EntityBase> DesativarPagamentoAsync(int id);
     }
 }
