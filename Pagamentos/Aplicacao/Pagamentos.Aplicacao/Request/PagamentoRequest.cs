@@ -4,6 +4,8 @@ namespace Pagamentos.Aplicacao.Request
 {
     public class PagamentoRequest
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage ="Valor obrigatório")]
         public decimal Valor { get; set; }
 
