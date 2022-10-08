@@ -15,18 +15,21 @@ namespace Pagamentos.Api.Controllers
         private IInserirPagamentoHandle _inserirPagamentoHandle;
         private IObterPagamentoHandle _obterPagamentoHandle;
         private IExcluirPagamentoHandle _excluirPagamentoHandle;
+        private IAtualizarPagamentoHandle _atualizarPagamentoHandle;
 
         public PagamentosController(
             IInserirPagamentoHandle inserirPagamentoHandle,
             IObterPagamentoHandle obterPagamentoHandle,
-            IExcluirPagamentoHandle excluirPagamentoHandle)
+            IExcluirPagamentoHandle excluirPagamentoHandle,
+            IAtualizarPagamentoHandle atualizarPagamentoHandle)
         {
             _inserirPagamentoHandle = inserirPagamentoHandle;
             _obterPagamentoHandle = obterPagamentoHandle;
             _excluirPagamentoHandle = excluirPagamentoHandle;
+            _atualizarPagamentoHandle = atualizarPagamentoHandle;
         }
 
-        [HttpPost]
+        [HttpPost("Inserir")]
         public async Task<IActionResult> PostAsync([FromBody] PagamentoRequest req)
         {
             InserirPagamentoResponse ret = new();
@@ -41,6 +44,32 @@ namespace Pagamentos.Api.Controllers
                 {
                     ret.Success = false;
                     ret.Errors.Add("Não foi possível inserir o pagamento");
+                }
+                return Ok(ret);
+            }
+            catch (Exception ex)
+            {
+                ret.Success = false;
+                ret.Errors.Add($"Não foi possível inserir o pagamento: {ex.Message}");
+                return StatusCode(500, ret);
+            }
+        }
+
+        [HttpPost("Atualizar")]
+        public async Task<IActionResult> UpadteAsync([FromBody] PagamentoRequest req)
+        {
+            EntityBase ret = new();
+            if (!ModelState.IsValid)
+                return BadRequest(Helper.MensagemConcatenada(ModelState.GetErros()));
+
+            try
+            {
+                ret.Success = await _atualizarPagamentoHandle.UpdateAsync(req);
+
+                if (!ret.Success)
+                {
+                    ret.Errors.Add("Não foi possível atualizar o pagamento");
+                    return BadRequest(ret);
                 }
                 return Ok(ret);
             }
