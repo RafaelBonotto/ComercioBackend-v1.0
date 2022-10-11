@@ -32,7 +32,7 @@ namespace Pagamentos.Aplicacao.Handles
                         Dt_vencimento = pgto.Dt_vencimento,
                         Num_parcela = pgto.Num_parcela,
                         Qtd_parcela = pgto.Qtd_parcela,
-                        Nota_fiscal = pgto.Nota_fiscal,
+                        Nota_fiscal = int.Parse(pgto.Nota_fiscal),
                         Fornecedor_id = pgto.Fornecedor_id
                     });
             }

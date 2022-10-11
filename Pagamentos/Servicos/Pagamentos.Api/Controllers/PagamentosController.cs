@@ -1,6 +1,7 @@
 ﻿using Comum.Aplicacao.Extensions;
 using Comum.Aplicacao.Tools;
 using Comum.Dominio.Entidades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pagamentos.Aplicacao.Handles.Interfaces;
 using Pagamentos.Aplicacao.Request;
@@ -8,6 +9,7 @@ using Pagamentos.Aplicacao.Response;
 
 namespace Pagamentos.Api.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     [Route("api/v1/pagamento")]
     [ApiController]
     public class PagamentosController : ControllerBase
