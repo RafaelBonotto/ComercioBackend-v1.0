@@ -1,10 +1,12 @@
 ﻿using Comum.Aplicacao.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Usuario.Api.ViewModel;
 using Usuario.Aplicacao.Handles.Interfaces;
 
 namespace Usuario.Api.Controllers
 {
+    
     [Route("v1/usuario")]
     [ApiController]
     public class UsuarioController : ControllerBase

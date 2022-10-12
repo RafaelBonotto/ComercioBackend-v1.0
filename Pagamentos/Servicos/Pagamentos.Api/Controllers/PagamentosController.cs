@@ -9,7 +9,7 @@ using Pagamentos.Aplicacao.Response;
 
 namespace Pagamentos.Api.Controllers
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize]
     [Route("api/v1/pagamento")]
     [ApiController]
     public class PagamentosController : ControllerBase
