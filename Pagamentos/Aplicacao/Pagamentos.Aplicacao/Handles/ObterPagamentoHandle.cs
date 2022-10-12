@@ -24,17 +24,20 @@ namespace Pagamentos.Aplicacao.Handles
             if (pgtos != null && pgtos.Any())
             {
                 foreach (var pgto in pgtos)
+                {
+                    var valorStr = pgto.Valor.ToString("N2");
                     ret.Pagamentos.Add(new PagamentoResponse
                     {
                         PagamentoId = pgto.Id,
-                        Valor = pgto.Valor,
-                        Dt_entrega = pgto.Dt_entrega,
-                        Dt_vencimento = pgto.Dt_vencimento,
+                        Valor = Math.Round(Convert.ToDouble(valorStr, CultureInfo.InvariantCulture), 2),
+                        Dt_entrega = pgto.Dt_entrega.ToString("dd/MM/yyyy"),
+                        Dt_vencimento = pgto.Dt_vencimento.ToString("dd/MM/yyyy"),
                         Num_parcela = pgto.Num_parcela,
                         Qtd_parcela = pgto.Qtd_parcela,
                         Nota_fiscal = int.Parse(pgto.Nota_fiscal),
                         Fornecedor_id = pgto.Fornecedor_id
                     });
+                }
             }
             return ret;
         }
