@@ -25,11 +25,10 @@ namespace Pagamentos.Aplicacao.Handles
             {
                 foreach (var pgto in pgtos)
                 {
-                    var valorStr = pgto.Valor.ToString("N2");
                     ret.Pagamentos.Add(new PagamentoResponse
                     {
                         PagamentoId = pgto.Id,
-                        Valor = Math.Round(Convert.ToDouble(valorStr, CultureInfo.InvariantCulture), 2),
+                        Valor = Math.Round(Convert.ToDouble(pgto.Valor, CultureInfo.InvariantCulture), 2),
                         Dt_entrega = pgto.Dt_entrega.ToString("dd/MM/yyyy"),
                         Dt_vencimento = pgto.Dt_vencimento.ToString("dd/MM/yyyy"),
                         Num_parcela = pgto.Num_parcela,
